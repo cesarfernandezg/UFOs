@@ -8,45 +8,45 @@ var tbody = d3.select("tbody");
 // Declare a variable, tbody
 // Use d3.select to tell JavaScript to look for the <tbody> tags in the HTML
 
-function printhHello() {
-    console.log("Hello there");
-}
+// function printhHello() {
+//     console.log("Hello there");
+// }
 
-// takes two numbers and adds them
-function addition(a, b) {
-    return a + b;
-}
+// // takes two numbers and adds them
+// function addition(a, b) {
+//     return a + b;
+// }
 
-// Functions can call other functions
-function doubleAddition(c, d) {
-    var total = addition(c, d) * 2;
-    return total;
-  }
+// // Functions can call other functions
+// function doubleAddition(c, d) {
+//     var total = addition(c, d) * 2;
+//     return total;
+//   }
 
-// Converted to an arrow function
-addition = (a, b) => a + b;
+// // Converted to an arrow function
+// addition = (a, b) => a + b;
 
-// iterate through a list and then print each item within it individually
-function listLoop(userList) {
-    for (var i = 0; i < userList.length; i++) {
-      console.log(userList[i]);
-    }
- }
+// // iterate through a list and then print each item within it individually
+// function listLoop(userList) {
+//     for (var i = 0; i < userList.length; i++) {
+//       console.log(userList[i]);
+//     }
+//  }
 
- // var i = 0 iterable variable and set its value to zero
- // i < userList.lenght 
- // i++ increase the iterable by 1
+//  // var i = 0 iterable variable and set its value to zero
+//  // i < userList.lenght 
+//  // i++ increase the iterable by 1
 
- // create a for loop to iterate through an array
- let vegetables = ["Carrots", "Peas", "Lettuce", "Tomatoes"];
- for (var i = 0; i < vegetables.length; i++) {
-     console.log("I love " + vegetables[i]);
- }
+//  // create a for loop to iterate through an array
+//  let vegetables = ["Carrots", "Peas", "Lettuce", "Tomatoes"];
+//  for (var i = 0; i < vegetables.length; i++) {
+//      console.log("I love " + vegetables[i]);
+//  }
 
- // loop through numbers without using an array
- for (var i = 0; i < 5; i++) {
-     console.log("I am " + i);
- }
+//  // loop through numbers without using an array
+//  for (var i = 0; i < 5; i++) {
+//      console.log("I am " + i);
+//  }
 
 
 // introduction to dynamic tables
@@ -76,5 +76,35 @@ function buildTable(data) {
 // Looped through each object in the array
 // Appended a row to the HTML table
 // Added each value from the object into a cell
+
+// Add filters
+function handleClick() {
+    let date = d3.select("#datetime").property("value");
+    // select function selects the very first element that matches
+    // our selector string #datetime
+    // the selector string is the item we're telling D3.js
+    // to look for
+
+    // set default filter
+    let filteredData = tableData;
+
+    // add if statement
+    if (date) {
+        filteredData = filteredData.filter(row => row.datetime === date);
+    };
+    // We’re applying a filter method that will match the datetime 
+    // value to the filtered date value.
+
+    // call the buildTable function
+    buildTable(filteredData);
+}
+
+// Attach an event to listen for the form button
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+// Build the table when the page loads
+buildTable(tableData);
+
+
 
 
